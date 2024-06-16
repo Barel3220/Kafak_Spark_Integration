@@ -1,0 +1,6 @@
+confluent_kafka
+pandas
+matplotlib
+seaborn
+tldextract
+pyspark

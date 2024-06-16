@@ -1,9 +1,19 @@
-from confluent_kafka import Consumer, KafkaException, KafkaError
-import time
 import json
+import time
+
+from confluent_kafka import Consumer, KafkaException, KafkaError
 
 
 def create_consumer(group_id, topics_):
+    """Creates a Kafka consumer.
+
+    Args:
+        group_id (str): The consumer group ID.
+        topics_ (list): List of topics to subscribe to.
+
+    Returns:
+        Consumer: Configured Kafka consumer instance.
+    """
     consumer_conf = {
         'bootstrap.servers': 'localhost:9092',
         'group.id': group_id,
@@ -15,6 +25,14 @@ def create_consumer(group_id, topics_):
 
 
 def load_counts(output_file):
+    """Loads counts and clusters from a JSON file.
+
+    Args:
+        output_file (str): The path to the JSON file.
+
+    Returns:
+        tuple: A tuple containing two lists: counts and clusters.
+    """
     try:
         with open(output_file, 'r') as f:
             data = json.load(f)
@@ -24,11 +42,26 @@ def load_counts(output_file):
 
 
 def save_counts(counts, clusters, output_file):
+    """Saves counts and clusters to a JSON file.
+
+    Args:
+        counts (list): List of message counts.
+        clusters (list): List of cluster labels.
+        output_file (str): The path to the JSON file.
+    """
     with open(output_file, 'w') as f:
         json.dump({'counts': counts, 'clusters': clusters}, f)
 
 
 def consume_and_count(consumer_, topics_, interval=1, output_file='message_counts.json'):
+    """Consumes messages from Kafka and updates counts.
+
+    Args:
+        consumer_ (Consumer): Kafka consumer instance.
+        topics_ (list): List of topics to consume from.
+        interval (int): Interval in seconds to update the counts.
+        output_file (str): The path to the JSON file for saving counts.
+    """
     counts, clusters = load_counts(output_file)
     start_time = time.time()
     try:
