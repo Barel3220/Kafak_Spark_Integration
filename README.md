@@ -123,6 +123,15 @@ python create_topics.py
 
 Ensure you have your data file sample_campaign_data_2023.csv. This file is already preprocessed!
 The preprocessing.py file is for larger files (millions of rows)
+The process of cleaning and preparing the data is simple in idea:
+1. **Data Cleaning**:
+Check for and count missing values in the dataset.
+Remove rows with missing values in crucial columns (‘title’ and ‘description’) and reset the DataFrame index.
+2. **Data Filtering**:
+Define a function to ensure that the text in the ‘description’ column contains only English characters and common punctuation.
+Apply this function to filter out non-English descriptions.
+3. **Data Saving**:
+Save the filtered DataFrame, containing only English descriptions, to a new CSV file.
 
 ### Step 5: Create Required Directories
 

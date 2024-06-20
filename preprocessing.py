@@ -7,7 +7,8 @@ file_path_w_headers = 'campaign_data_2023_with_headers.csv'
 column_names = ['creation_time', 'id', 'url', 'title', 'keywords', 'description']
 
 # Load the CSV file into a DataFrame, specifying column names and handling bad lines
-campaign_dataframe = pd.read_csv(file_path, names=column_names, header=0, quotechar='"', delimiter=',', on_bad_lines='skip')
+campaign_dataframe = pd.read_csv(file_path, names=column_names, header=0,
+                                 quotechar='"', delimiter=',', on_bad_lines='skip')
 
 campaign_dataframe.columns = column_names
 
